@@ -1,7 +1,7 @@
 {
-    "firstName":"John",
-    "lastName":"Wick",
-    "email":"jwick@company.com",
-    "startDate":"04/17/2007",
-    "title":"Manager"
+  "firstName": "John",
+  "lastName": "Wick",
+  "email": "jwick@company.com",
+  "startDate": "04/17/2007",
+  "title": "Manager"
 }
