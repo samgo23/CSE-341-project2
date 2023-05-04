@@ -5,7 +5,7 @@
     "description": "Description",
     "version": "1.0.0"
   },
-  "host": "cse-341-project-1.onrender.com",
+  "host": "cse-341-project2-9tcn.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"
@@ -20,7 +20,10 @@
     },
     "/employee/": {
       "get": {
-        "description": "",
+        "description": "Get all employees",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -32,7 +35,7 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "Create a new employee",
         "parameters": [
           {
             "name": "body",
@@ -41,19 +44,19 @@
               "type": "object",
               "properties": {
                 "firstName": {
-                  "example": "any"
+                  "example": "First Name"
                 },
                 "lastName": {
-                  "example": "any"
+                  "example": "Last Name"
                 },
                 "email": {
-                  "example": "any"
+                  "example": "email@email.com"
                 },
                 "startDate": {
-                  "example": "any"
+                  "example": "mm/dd/yyyy"
                 },
                 "title": {
-                  "example": "any"
+                  "example": "Assisant to the regional manager"
                 }
               }
             }
@@ -71,7 +74,10 @@
     },
     "/employee/{id}": {
       "get": {
-        "description": "",
+        "description": "Get one employee by their ID",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",

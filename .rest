@@ -17,3 +17,21 @@ content-type: application/json
     "startDate":"05/04/2016",
     "title":"Jedi Master"
 }
+
+###
+GET https://cse-341-project2-9tcn.onrender.com/employee HTTP/1.1
+
+###
+GET https://cse-341-project2-9tcn.onrender.com/employee/645314ed574650f6e277dbae HTTP/1.1
+
+###
+POST https://cse-341-project2-9tcn.onrender.com/employee HTTP/1.1
+content-type: application/json
+
+{
+    "firstName":"Luke",
+    "lastName":"Skywalker",
+    "email":"lskywalker@company.com",
+    "startDate":"05/04/2016",
+    "title":"Jedi Master"
+}
