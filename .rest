@@ -1,0 +1,19 @@
+###
+GET http://localhost:8080/employee HTTP/1.1
+
+###
+GET http://localhost:8080/employee/645314ed574650f6e277dbae HTTP/1.1
+
+###
+GET http://localhost:8080/employee/64531ccea26d89d24908d5dc HTTP/1.1
+###
+POST http://localhost:8080/employee HTTP/1.1
+content-type: application/json
+
+{
+    "firstName":"Luke",
+    "lastName":"Skywalker",
+    "email":"lskywalker@company.com",
+    "startDate":"05/04/2016",
+    "title":"Jedi Master"
+}
