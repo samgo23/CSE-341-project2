@@ -38,7 +38,7 @@ const createEmployee = async (req, res) => {
   };
   const response = await mongodb.getDb().db().collection('employee').insertOne(employee);
   if (response.acknowledged) {
-    res.status(200).json({ id: response.insertedId });
+    res.status(201).json({ id: response.insertedId });
   } else {
     res.status(500).json({ error: 'Unable to create employee' });
   }
