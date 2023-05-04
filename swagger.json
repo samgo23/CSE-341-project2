@@ -74,7 +74,7 @@
     },
     "/employee/{id}": {
       "get": {
-        "description": "Get one employee by their ID",
+        "description": "Get one employee by their ID. Try it out with this ID: 645314ed574650f6e277dbae",
         "produces": [
           "application/json"
         ],
