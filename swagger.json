@@ -11,7 +11,7 @@
   "paths": {
     "/api-docs": {
       "get": {
-        "description": "",
+        "description": "Swagger Documentation",
         "parameters": [],
         "responses": {}
       }
@@ -40,19 +40,24 @@
               "type": "object",
               "properties": {
                 "firstName": {
-                  "example": "First Name"
+                  "example": "First Name",
+                  "type": "string"
                 },
                 "lastName": {
-                  "example": "Last Name"
+                  "example": "Last Name",
+                  "type": "string"
                 },
                 "email": {
-                  "example": "email@email.com"
+                  "example": "email@example.com",
+                  "type": "email | string"
                 },
                 "startDate": {
-                  "example": "mm/dd/yyyy"
+                  "example": "mm/dd/yyyy",
+                  "type": "string"
                 },
                 "title": {
-                  "example": "Assisant to the regional manager"
+                  "example": "Assisant to the regional manager",
+                  "type": "string"
                 }
               }
             }
@@ -80,7 +85,8 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "The ID of the employee"
           }
         ],
         "responses": {
@@ -91,7 +97,93 @@
             "description": "Internal Server Error"
           }
         }
+      },
+      "put": {
+        "description": "Update an employee",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the employee"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "example": "First Name",
+                  "type": "string"
+                },
+                "lastName": {
+                  "example": "Last Name",
+                  "type": "string"
+                },
+                "email": {
+                  "example": "email@example.com",
+                  "type": "string"
+                },
+                "startDate": {
+                  "example": "mm/dd/yyyy",
+                  "type": "string"
+                },
+                "title": {
+                  "example": "Assistant to the Regional Manager",
+                  "type": "string"
+                }
+              },
+              "required": ["firstName", "lastName", "email", "startDate", "title"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete an employee",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the employee"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
       }
     }
   }
 }
+

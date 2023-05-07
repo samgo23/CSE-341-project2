@@ -17,26 +17,26 @@ const getAllEmployees = (req, res) => {
 };
 
 const getEmployeeById = async (req, res) => {
-    if (!ObjectId.isValid(req.params.id)) {
-      res.status(400).json({ error: 'Must use a valid employee ID number.' });
-      return;
-    }
+  if (!ObjectId.isValid(req.params.id)) {
+    res.status(400).json({ error: 'Must use a valid employee ID number.' });
+    return;
+  }
 
-    const employeeId = new ObjectId(req.params.id);
-    const result = await mongodb
-      .getDb()
-      .db()
-      .collection('employee')
-      .find({ _id: employeeId })
-      .toArray();
+  const employeeId = new ObjectId(req.params.id);
+  const result = await mongodb
+    .getDb()
+    .db()
+    .collection('employee')
+    .find({ _id: employeeId })
+    .toArray();
 
-    if (result.length === 0) {
-      res.status(404).json({ error: 'Employee not found.' });
-      return;
-    }
+  if (result.length === 0) {
+    res.status(404).json({ error: 'Employee not found.' });
+    return;
+  }
 
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(result[0]);
+  res.setHeader('Content-Type', 'application/json');
+  res.status(200).json(result[0]);
 };
 
 const createEmployee = async (req, res) => {
@@ -55,11 +55,9 @@ const createEmployee = async (req, res) => {
   } else {
     res.status(500).json({ error: 'Unable to create employee.' });
   }
-
 };
 
 const updateEmployee = async (req, res) => {
-
   if (!ObjectId.isValid(req.params.id)) {
     res.status(400).json({ error: 'Must use a valid employee ID number.' });
     return;
@@ -100,7 +98,11 @@ const removeEmployee = async (req, res) => {
   }
 
   const userId = new ObjectId(req.params.id);
-  const deletedEmployee = await mongodb.getDb().db().collection('employee').findOne({ _id: userId });
+  const deletedEmployee = await mongodb
+    .getDb()
+    .db()
+    .collection('employee')
+    .findOne({ _id: userId });
 
   if (deletedEmployee) {
     const { _id, firstName, lastName } = deletedEmployee;
