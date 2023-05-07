@@ -18,6 +18,6 @@ router.post('/', validation.validEmployeeData, employeeController.createEmployee
 router.put('/:id', validation.validEmployeeData, employeeController.updateEmployee);
 
 // DELETE EMPLOYEE
-router.delete('/:id', employeeController.deleteEmployee);
+router.delete('/:id', employeeController.removeEmployee);
 
 module.exports = router;

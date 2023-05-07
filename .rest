@@ -13,10 +13,25 @@ content-type: application/json
 {
     "firstName":"Luke",
     "lastName":"Skywalker",
-    "email":"lskywalker@company.com",
+    "email":"lsky@company.com",
     "startDate":"05/04/2016",
     "title":"Jedi Master"
 }
+
+###
+PUT http://localhost:8080/employee/64532ca524d803e4abae7965 HTTP/1.1
+content-type: application/json
+
+{
+    "firstName":"Luke",
+    "lastName":"Skywalker",
+    "email":"lsky@company.com",
+    "startDate":"05/04/2016",
+    "title":"Jedi"
+}
+
+###
+DELETE http://localhost:8080/employee/64532ca524d803e4abae7965 HTTP/1.1
 
 ###
 GET https://cse-341-project2-9tcn.onrender.com/employee HTTP/1.1
