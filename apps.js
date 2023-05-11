@@ -1,7 +1,6 @@
 var express = require('express');
 const bodyParser = require('body-parser');
 const mongodb = require('./db/connection'); // mongodb connection
-
 const passport = require('passport');
 require('./config/passport');
 const session = require('express-session');
