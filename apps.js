@@ -42,7 +42,7 @@ mongodb.initDb((err) => {
   }
 });
 
-app.get('/', (req, res) => { res.send(req.session.user !== undefined ? `Logged in as ${req.session.user.displayName}` : "Logged Out")});
+app.get('/', (req, res) => { res.send(req.session.user !== undefined ? `Logged in as Sam Gordon` : "Logged Out")});
 
 app.get('/github/callback', passport.authenticate('github', {
     failureRedirect: '/api-docs', session: false}), 
@@ -50,7 +50,7 @@ app.get('/github/callback', passport.authenticate('github', {
     req.session.user = req.user;
     res.redirect('/');
   });
-  
+
 //app.post('/login', (req, res) => {
 //  const authorizationCode = req.body.code;
 //
