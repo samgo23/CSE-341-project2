@@ -5,13 +5,13 @@ GET http://localhost:8080/employee HTTP/1.1
 GET http://localhost:8080/employee/645314ed574650f6e277dbae HTTP/1.1
 
 ###
-GET http://localhost:8080/employee/64531ccea26d89d24908d5dc HTTP/1.1
+GET http://localhost:8080/employee/64571b4ee7e7120f03b38482 HTTP/1.1
 ###
 POST http://localhost:8080/employee HTTP/1.1
 content-type: application/json
 
 {
-    "firstName":"Luke",
+    "firstName":"Rey",
     "lastName":"Skywalker",
     "email":"lsky@company.com",
     "startDate":"05/04/2016",
@@ -19,19 +19,19 @@ content-type: application/json
 }
 
 ###
-PUT http://localhost:8080/employee/64532ca524d803e4abae7965 HTTP/1.1
+PUT http://localhost:8080/employee/64571b4ee7e7120f03b38482 HTTP/1.1
 content-type: application/json
 
 {
-    "firstName":"Luke",
+    "firstName":"Leia",
     "lastName":"Skywalker",
     "email":"lsky@company.com",
     "startDate":"05/04/2016",
-    "title":"Jedi"
+    "title":"General"
 }
 
 ###
-DELETE http://localhost:8080/employee/64532ca524d803e4abae7965 HTTP/1.1
+DELETE http://localhost:8080/employee/6457222fb406a5fbf85dda02 HTTP/1.1
 
 ###
 GET https://cse-341-project2-9tcn.onrender.com/employee HTTP/1.1
