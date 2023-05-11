@@ -1,6 +1,6 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
-//const User = require('../models/user');
+const User = require('../models/user');
 const githubStrategy = require('passport-github2');
 
 passport.use(
@@ -21,20 +21,20 @@ passport.use(
         image: profile.photos[0].value,
         };
 
-        //try {
-            //let user = await User.findOne({ googleId: profile.id });
+        try {
+            let user = await User.findOne({ googleId: profile.id });
 
-           // if (user) {
-               // done(null, user);
-            //}
-            //else {
-           //     user = await User.create(newUser);
-            //    done(null, user);
-           // }
+            if (user) {
+                done(null, user);
+            }
+            else {
+                user = await User.create(newUser);
+                done(null, user);
+            }
 
-       // } catch (err) {
-        //    console.error(err);
-       // }
+        } catch (err) {
+            console.error(err);
+        }
     }
   )
 );
@@ -45,11 +45,7 @@ passport.use(new githubStrategy(
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
     callbackURL: process.env.GITHUB_CALLBACK_URL
     },
-    function(accessToken, refreshToken, profile, done) {
-        //User.findOrCreate({ githubId: profile.id }, function (err, user) {
-        //    return done(err, user);
-        //});
-    }
+    
 ));
 
 passport.serializeUser((user, done) => {
