@@ -26,9 +26,25 @@ const userSchema = new Schema({
         type: Date,
         default: Date.now
     }
-
 });
 
-const User = mongoose.model('user', userSchema);
+userSchema.statics.findOrCreate = function (condition) {
+    const self = this;
+    return this.findOne(condition)
+      .then(result => {
+        if (result) {
+          return result;
+        } else {
+          return self.create(condition);
+        }
+      })
+      .catch(err => {
+        throw err;
+      });
+  };
+  
+  
 
-module.exports = { User };
+const User = mongoose.model('User', userSchema);
+
+module.exports = User;

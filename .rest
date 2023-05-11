@@ -11,15 +11,15 @@ POST http://localhost:8080/employee HTTP/1.1
 content-type: application/json
 
 {
-    "firstName":"Rey",
-    "lastName":"Skywalker",
-    "email":"lsky@company.com",
-    "startDate":"05/04/2016",
-    "title":"Jedi Master"
+  "firstName": "Jimi",
+  "lastName": "Hendrix",
+  "email": "Jhend@company.com",
+  "startDate": "04/04/1965",
+  "title": "Assistant to the regional manager"
 }
 
 ###
-PUT http://localhost:8080/employee/64571b4ee7e7120f03b38482 HTTP/1.1
+PUT http://localhost:8080/employee/645c655bc7cee2fdf9f990a5 HTTP/1.1
 content-type: application/json
 
 {

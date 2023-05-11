@@ -56,7 +56,7 @@
                   "type": "string"
                 },
                 "title": {
-                  "example": "Assisant to the regional manager",
+                  "example": "Assistant to the regional manager",
                   "type": "string"
                 }
               }
@@ -131,7 +131,7 @@
                   "type": "string"
                 },
                 "title": {
-                  "example": "Assistant to the Regional Manager",
+                  "example": "Assistant to the regional manager",
                   "type": "string"
                 }
               },
