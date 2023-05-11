@@ -42,21 +42,15 @@ mongodb.initDb((err) => {
   }
 });
 
-app.get('/', (req, res) => {
-  res.send(
-    req.session.user !== undefined ? `Logged in as ${req.session.user.displayName}` : 'Logged out'
-  );
-});
+app.get('/', (req, res) => { res.send(req.session.user !== undefined ? `Logged in as ${req.session.user.displayName}` : "Logged Out")});
 
-app.get(
-  '/github/callback',
-  passport.authenticate('github', { failureRedirect: '/api-docs', session: false }),
-  (req, res) => {
+app.get('/github/callback', passport.authenticate('github', {
+    failureRedirect: '/api-docs', session: false}), 
+    (req, res) => {
     req.session.user = req.user;
     res.redirect('/');
-  }
-);
-
+  });
+  
 //app.post('/login', (req, res) => {
 //  const authorizationCode = req.body.code;
 //

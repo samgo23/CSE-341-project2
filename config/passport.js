@@ -9,7 +9,7 @@ passport.use(
       // options for the google strategy
       callbackURL: process.env.GOOGLE_CALLBACK_URL,
       clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET
     },
     async (accessToken, refreshToken, profile, done) => {
       // passport callback function
@@ -18,42 +18,46 @@ passport.use(
         displayName: profile.displayName,
         firstName: profile.name.givenName,
         lastName: profile.name.familyName,
-        image: profile.photos[0].value,
-        };
+        image: profile.photos[0].value
+      };
 
-        try {
-            let user = await User.findOne({ googleId: profile.id });
+      try {
+        let user = await User.findOne({ googleId: profile.id });
 
-            if (user) {
-                done(null, user);
-            }
-            else {
-                user = await User.create(newUser);
-                done(null, user);
-            }
-
-        } catch (err) {
-            console.error(err);
+        if (user) {
+          done(null, user);
+        } else {
+          user = await User.create(newUser);
+          done(null, user);
         }
+      } catch (err) {
+        console.error(err);
+      }
     }
   )
 );
 
-passport.use(new githubStrategy(
+passport.use(
+  new GitHubStrategy(
     {
-    clientID: process.env.GITHUB_CLIENT_ID,
-    clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: process.env.GITHUB_CALLBACK_URL
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      callbackURL: process.env.CALLBACK_URL
     },
-    
-));
+    function (accessToken, refreshToken, profile, done) {
+      //User.findOrCreate({ githubId: profile.id }, function (err, user) {
+      return done(null, profile);
+      //});
+    }
+  )
+);
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
-passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => done(null, user));
+passport.deserializeUser((user, done) => {
+  done(null, user);
 });
 
 module.exports = passport;
