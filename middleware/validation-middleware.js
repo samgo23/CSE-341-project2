@@ -22,4 +22,29 @@ const validEmployeeData = (req, res, next) => {
   });
 };
 
-module.exports = { validEmployeeData };
+
+const validTicketData = (req, res, next) => {
+  const validationRule = {
+    subject: 'required|string',
+    description: 'required|string',
+    status: 'required|string',
+    priority: 'required|string',
+    created_at: 'required|string',
+    created_by: 'required|string',
+    assigned_to: 'required|string'
+  };
+
+  validator(req.body, validationRule, {}, (err, status) => {
+    if (!status) {
+      res.status(412).send({
+        sucess: false,
+        message: 'Validation failed',
+        data: err
+      });
+    } else {
+      next();
+    }
+  });
+};
+
+module.exports = { validEmployeeData, validTicketData };

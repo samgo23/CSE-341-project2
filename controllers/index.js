@@ -1,13 +1,13 @@
 const mongodb = require('../db/connection');
 const ObjectId = require('mongodb').ObjectId;
 
-const getAllEmployees = (req, res) => {
-  mongodb
+const getAllEmployees = async (req, res) => {
+  const result = await mongodb
     .getDb()
     .db()
     .collection('employee')
-    .find()
-    .toArray((err, list) => {
+    .find();
+    result.toArray().then((err, list) => {
       if (err) {
         res.status(400).json({ message: err });
       }

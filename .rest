@@ -37,6 +37,28 @@ DELETE http://localhost:8080/employee/6457222fb406a5fbf85dda02 HTTP/1.1
 GET http://localhost:8080/employee/google HTTP/1.1
 
 ###
+GET http://localhost:8080/ticket HTTP/1.1
+
+
+###
+GET http://localhost:8080/ticket/645eb25fe4db89681f452a12 HTTP/1.1
+
+###
+POST http://localhost:8080/ticket HTTP/1.1
+content-type: application/json
+
+{
+    "subject": "Ticket Subject",
+    "description": "This feauture is not working",
+    "status": "Not started",
+    "priority": "High",
+    "created_at": " Timestamp",
+    "created_by": " User Name",
+    "assigned_to": "Tech 1"
+}
+
+
+###
 GET https://cse-341-project2-9tcn.onrender.com/employee HTTP/1.1
 
 ###
