@@ -7,26 +7,58 @@
   },
   "host": "cse-341-project2-9tcn.onrender.com",
   "basePath": "/",
-  "schemes": ["https"],
+  "schemes": [
+    "https"
+  ],
   "paths": {
-    "/api-docs": {
+    "/login": {
       "get": {
-        "description": "Swagger Documentation",
+        "description": "Swagger documentation",
         "parameters": [],
         "responses": {}
       }
     },
+    "/google": {
+      "get": {
+        "description": "Retrieve user information from Google.",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/google/callback": {
+      "get": {
+        "description": "Handle the callback after authentication with Google.",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/logout": {
+      "get": {
+        "description": "Log out the current user.",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/api-docs": {
+      "get": {
+        "description": "Retrieve the Swagger API documentation.",
+        "parameters": [],
+        "responses": {}
+      }
+    },    
     "/employee/": {
       "get": {
         "description": "Get all employees",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
           },
-          "500": {
-            "description": "Internal Server Error"
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -40,35 +72,40 @@
               "type": "object",
               "properties": {
                 "firstName": {
-                  "example": "First Name",
-                  "type": "string"
+                  "example": "John"
                 },
                 "lastName": {
-                  "example": "Last Name",
-                  "type": "string"
+                  "example": "Doe"
                 },
                 "email": {
-                  "example": "email@example.com",
-                  "type": "email | string"
+                  "example": "johndoe@example.com"
                 },
                 "startDate": {
-                  "example": "mm/dd/yyyy",
-                  "type": "string"
+                  "example": "2023-05-13"
                 },
                 "title": {
-                  "example": "Assistant to the regional manager",
-                  "type": "string"
+                  "example": "Software Engineer"
                 }
-              }
+              },
+              "required": [
+                "firstName",
+                "lastName",
+                "email",
+                "startDate",
+                "title"
+              ]
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "201": {
             "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "412": {
+            "description": "Precondition Failed"
           },
           "500": {
             "description": "Internal Server Error"
@@ -78,35 +115,38 @@
     },
     "/employee/{id}": {
       "get": {
-        "description": "Get one employee by their ID. Try it out with this ID: 645314ed574650f6e277dbae",
-        "produces": ["application/json"],
+        "description": "Get employee by ID",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string",
-            "description": "The ID of the employee"
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
           },
-          "500": {
-            "description": "Internal Server Error"
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
       "put": {
-        "description": "Update an employee",
+        "description": "Update employee by ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string",
-            "description": "The ID of the employee"
+            "type": "string"
           },
           {
             "name": "body",
@@ -115,27 +155,21 @@
               "type": "object",
               "properties": {
                 "firstName": {
-                  "example": "First Name",
-                  "type": "string"
+                  "example": "John"
                 },
                 "lastName": {
-                  "example": "Last Name",
-                  "type": "string"
+                  "example": "Doe"
                 },
                 "email": {
-                  "example": "email@example.com",
-                  "type": "string"
+                  "example": "johndoe@example.com"
                 },
                 "startDate": {
-                  "example": "mm/dd/yyyy",
-                  "type": "string"
+                  "example": "2023-05-13"
                 },
                 "title": {
-                  "example": "Assistant to the regional manager",
-                  "type": "string"
+                  "example": "Software Engineer"
                 }
-              },
-              "required": ["firstName", "lastName", "email", "startDate", "title"]
+              }
             }
           }
         ],
@@ -143,14 +177,172 @@
           "200": {
             "description": "OK"
           },
-          "204": {
-            "description": "No Content"
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete employee by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/ticket/": {
+      "get": {
+        "description": "Get all tickets",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "post": {
+        "description": "Create a new ticket",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "subject": {
+                  "example": "Ticket subject"
+                },
+                "description": {
+                  "example": "Ticket description"
+                },
+                "status": {
+                  "example": "Not started"
+                },
+                "priority": {
+                  "example": "High"
+                },
+                "assigned_to": {
+                  "example": "Tech 1"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/ticket/{id}": {
+      "get": {
+        "description": "Get a ticket by ID",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           },
           "400": {
             "description": "Bad Request"
           },
           "404": {
             "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "description": "Update a ticket",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "example": "Ticket description"
+                },
+                "priority": {
+                  "example": "High"
+                },
+                "assigned_to": {
+                  "example": "Tech 2"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "412": {
             "description": "Precondition Failed"
@@ -161,25 +353,24 @@
         }
       },
       "delete": {
-        "description": "Delete an employee",
+        "description": "Delete a ticket",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string",
-            "description": "The ID of the employee"
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
           },
-          "204": {
-            "description": "No Content"
-          },
           "400": {
             "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Not Found"
@@ -188,6 +379,27 @@
             "description": "Internal Server Error"
           }
         }
+      }
+    },
+    "/auth/google": {
+      "get": {
+        "description": "Initiate Google authentication",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/auth/google/callback": {
+      "get": {
+        "description": "Callback endpoint for Google authentication",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/auth/logout": {
+      "get": {
+        "description": "Logout from the application",
+        "parameters": [],
+        "responses": {}
       }
     }
   }
