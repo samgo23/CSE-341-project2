@@ -23,8 +23,8 @@ router.get('/github', passport.authenticate('github', { scope: ['user:email'] })
 
 router.get(
   '/github/callback',
-  passport.authenticate('github', { failureRedirect: '/swagger/api-docs' }),
-  function (req, res) {
+  passport.authenticate('github', { failureRedirect: '/swagger/api-docs' }), 
+  (req, res) => {
     res.redirect('/swagger/api-docs');
   }
 );
