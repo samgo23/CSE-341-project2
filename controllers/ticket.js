@@ -70,7 +70,7 @@ const updateTicket = async (req, res) => {
 
   const response = await mongodb
     .getDb()
-    
+
     .collection('ticket')
     .updateOne({ _id: ticketId }, ticketUpdate);
 

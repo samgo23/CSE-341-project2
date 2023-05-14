@@ -3,10 +3,11 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const initDb = (callback) => {
-  mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
+  mongoose
+    .connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    })
     .then(() => {
       console.log('Database connected!');
       callback(null, mongoose.connection);
@@ -23,9 +24,7 @@ const getDb = () => {
   return mongoose.connection;
 };
 
-
 module.exports = {
   initDb,
   getDb
 };
-

@@ -19,10 +19,7 @@ router.get(
   }
 );
 
-router.get(
-  '/github',
-  passport.authenticate('github', { scope: ['user:email'] })
-);
+router.get('/github', passport.authenticate('github', { scope: ['user:email'] }));
 
 router.get(
   '/github/callback',
@@ -33,4 +30,3 @@ router.get(
 );
 
 module.exports = router;
-

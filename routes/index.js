@@ -12,4 +12,3 @@ router.use('/ticket', ticketRouter);
 router.use('/auth', authRouter);
 
 module.exports = router;
-

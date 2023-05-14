@@ -19,11 +19,7 @@ const getEmployeeById = async (req, res) => {
   }
 
   const employeeId = new ObjectId(req.params.id);
-  const result = await mongodb
-    .getDb()
-    .collection('employee')
-    .find({ _id: employeeId })
-    .toArray();
+  const result = await mongodb.getDb().collection('employee').find({ _id: employeeId }).toArray();
 
   if (result.length === 0) {
     res.status(404).json({ error: 'Employee not found.' });
@@ -92,10 +88,7 @@ const removeEmployee = async (req, res) => {
   }
 
   const userId = new ObjectId(req.params.id);
-  const deletedEmployee = await mongodb
-    .getDb()
-    .collection('employee')
-    .findOne({ _id: userId });
+  const deletedEmployee = await mongodb.getDb().collection('employee').findOne({ _id: userId });
 
   if (deletedEmployee) {
     const { _id, firstName, lastName } = deletedEmployee;

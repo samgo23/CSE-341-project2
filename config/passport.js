@@ -21,37 +21,6 @@ function(accessToken, refreshToken, profile, cb) {
 }
 ));
 
-//passport.use(
-//  new GoogleStrategy(
-//    {
-//      // options for the google strategy
-//      callbackURL: 
-//      clientID: 
-//      clientSecret: 
-//    },
-//    async (accessToken, refreshToken, profile, done) => {
-//      // passport callback function
-//      const newUser = {
-//        
-//      };
-//
-//      try {
-//        let user = await User.findOne({ googleId: profile.id });
-//
-//        if (user) {
-//          done(null, user);
-//        } else {
-//          user = await User.create(newUser);
-//          done(null, user);
-//        }
-//      } catch (err) {
-//        console.error(err);
-//        done(err, null);
-//      }
-//    }
-//  )
-//);
-
 passport.use(new GitHubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
@@ -70,36 +39,6 @@ function(accessToken, refreshToken, profile, done) {
 }
 ));
 
-//passport.use(
-//  new GithubStrategy(
-//    {
-//      clientID: 
-//      clientSecret: 
-//      callbackURL: 
-//    },
-//    async (accessToken, refreshToken, profile, done) => {
-//      try {
-//        let user = await User.findOne({ githubId: profile.id });
-//
-//        if (user) {
-//          done(null, user);
-//        } else {
-//          const newUser = {
-//            githubId: profile.id,
-//            
-//          };
-//
-//          user = await User.create(newUser);
-//          done(null, user);
-//        }
-//      } catch (err) {
-//        console.error(err);
-//        done(err, null);
-//      }
-//    }
-//  )
-//);
-//
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });

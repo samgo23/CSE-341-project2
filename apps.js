@@ -1,4 +1,4 @@
-var express = require('express');
+const express = require('express');
 const bodyParser = require('body-parser');
 const mongodb = require('./db/connection'); // mongodb connection
 const passport = require('passport');
@@ -48,5 +48,3 @@ app.get('/', (req, res) => {
 
   res.send(req.session.user ? `Logged in ${req.session.user}` : 'Logged Out');
 });
-
-
