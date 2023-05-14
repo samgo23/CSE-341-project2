@@ -35,7 +35,7 @@ app
   .use(
     helmet.contentSecurityPolicy({
       directives: {
-        defaultSrc: ["'self'"], // Allow content from the same origin
+        defaultSrc: ["'self'", 'https://cse-341-project2-9tcn.onrender.com'], // Allow content from the same origin
         scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"], // Allow inline scripts and eval()
         styleSrc: ["'self'", "'unsafe-inline'"], // Allow inline styles
         imgSrc: ["'self'", "data:"], // Allow images from the same origin and data URIs
@@ -46,6 +46,7 @@ app
       },
     })
   );
+  
 
 mongodb.initDb((err) => {
   if (err) {
