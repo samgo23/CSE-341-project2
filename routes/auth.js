@@ -13,9 +13,9 @@ router.get('/google', passport.authenticate('google', { scope: ['profile'] }));
 
 router.get(
   '/google/callback',
-  passport.authenticate('google', { failureRedirect: '/api-docs' }),
+  passport.authenticate('google', { failureRedirect: '/swagger/api-docs' }),
   function (req, res) {
-    res.redirect('/api-docs');
+    res.redirect('/swagger/api-docs');
   }
 );
 
@@ -26,9 +26,9 @@ router.get(
 
 router.get(
   '/github/callback',
-  passport.authenticate('github', { failureRedirect: '/login' }),
+  passport.authenticate('github', { failureRedirect: '/swagger/api-docs' }),
   function (req, res) {
-    res.redirect('/api-docs');
+    res.redirect('/swagger/api-docs');
   }
 );
 

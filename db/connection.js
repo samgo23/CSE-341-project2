@@ -1,18 +1,17 @@
+const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config();
-const MongoClient = require('mongodb').MongoClient;
-
-let _db;
 
 const initDb = (callback) => {
-  if (_db) {
-    console.log('Database is already initialized!');
-    return callback(null, _db);
-  }
-  MongoClient.connect(process.env.MONGODB_URI)
-    .then((client) => {
-      _db = client;
-      callback(null, _db);
+  mongoose.connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+  })
+    .then(() => {
+      console.log('Database connected!');
+      callback(null, mongoose.connection);
     })
     .catch((err) => {
       callback(err);
@@ -20,10 +19,10 @@ const initDb = (callback) => {
 };
 
 const getDb = () => {
-  if (!_db) {
-    throw Error('Database not initialized!');
+  if (mongoose.connection.readyState !== 1) {
+    throw new Error('Database not initialized!');
   }
-  return _db;
+  return mongoose.connection;
 };
 
 module.exports = {
