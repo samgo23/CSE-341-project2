@@ -28,7 +28,7 @@ const googleSchema = new Schema({
   }
 });
 
-const githubSchema = new mongoose.Schema({
+const githubSchema = new Schema({
   githubId: {
     type: String,
     required: true,
@@ -57,22 +57,7 @@ const githubSchema = new mongoose.Schema({
   }
 });
 
-const userSchema = new Schema({
-  username: String,
-  password: String,
-  google: googleSchema,
-  github: githubSchema,
-  displayName: String,
-  firstName: String,
-  lastName: String,
-  image: String,
-  createdAt: {
-    type: Date,
-    default: Date.now
-  }
-});
-
-userSchema.statics.findOrCreate = function (condition) {
+githubSchema.statics.findOrCreate = function (condition) {
   const self = this;
   return this.findOne(condition)
     .then((result) => {
@@ -87,6 +72,25 @@ userSchema.statics.findOrCreate = function (condition) {
     });
 };
 
-const User = mongoose.model('User', userSchema);
+// Define a combined schema for both Google and GitHub users
+const User = mongoose.model('User', new Schema({
+  // Common fields for both Google and GitHub users
+  username: {
+    type: String,
+    required: true
+  },
+  displayName: {
+    type: String,
+    required: true
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  // Fields specific to Google users
+  google: googleSchema,
+  // Fields specific to GitHub users
+  github: githubSchema
+}));
 
 module.exports = User;

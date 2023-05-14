@@ -57,3 +57,4 @@ app.get('/', (req, res) => {
 
   res.send(req.session.user ? `Logged in ${req.session.user}` : 'Logged Out');
 });
+
