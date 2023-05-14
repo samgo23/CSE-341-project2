@@ -6,6 +6,8 @@ router.use('/', require('./swagger'));
 
 router.use('/employee', require('./employee'));
 router.use('/auth', require('./auth'));
+router.use('/ticket', require('./ticket'));
+
 
 router.get(
   '/login',
