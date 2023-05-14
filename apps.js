@@ -51,26 +51,3 @@ app.get('/', (req, res) => {
 });
 
 
-app.get(
-  '/github/callback',
-  passport.authenticate('github', {
-    failureRedirect: '/api-docs',
-    session: false
-  }),
-  (req, res) => {
-    req.session.user = req.user;
-    res.redirect('/');
-  }
-);
-
-app.post('/login', (req, res) => {
-  const authorizationCode = req.body.code;
-
-  client.requestToken(authorizationCode, (err, result) => {
-    if (err) {
-      return res.status(500).send(err);
-    }
-
-    res.redirect('/');
-  });
-});
