@@ -2,6 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const router = express.Router();
 
+const app = express();
 
 
 // @desc Logout user
@@ -16,24 +17,24 @@ router.get('/logout', function (req, res, next) {
   });
 });
 
-router.get('/auth/google',
+app.get('/auth/google',
   passport.authenticate('google', { scope: ['profile'] }));
 
-router.get('/auth/google/callback', 
+app.get('/auth/google/callback', 
   passport.authenticate('google', { failureRedirect: '/api-docs' }),
   function(req, res) {
     // Successful authentication, redirect home.
     res.redirect('/api-docs');
   });
 
-router.get('/auth/github',
+app.get('/auth/github',
   passport.authenticate('github', { scope: [ 'user:email' ] }));
 
-router.get('/auth/github/callback', 
+app.get('/auth/github/callback', 
   passport.authenticate('github', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
     res.redirect('/api-docs');
   });
 
-module.exports = router;
+module.exports = { router, app };

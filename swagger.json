@@ -9,41 +9,6 @@
   "basePath": "/",
   "schemes": ["https"],
   "paths": {
-    "/login": {
-      "get": {
-        "description": "Swagger documentation",
-        "parameters": [],
-        "responses": {}
-      }
-    },
-    "/google": {
-      "get": {
-        "description": "Retrieve user information from Google.",
-        "parameters": [],
-        "responses": {}
-      }
-    },
-    "/google/callback": {
-      "get": {
-        "description": "Handle the callback after authentication with Google.",
-        "parameters": [],
-        "responses": {}
-      }
-    },
-    "/logout": {
-      "get": {
-        "description": "Log out the current user.",
-        "parameters": [],
-        "responses": {}
-      }
-    },
-    "/api-docs": {
-      "get": {
-        "description": "Retrieve the Swagger API documentation.",
-        "parameters": [],
-        "responses": {}
-      }
-    },
     "/employee/": {
       "get": {
         "description": "Get all employees",
@@ -223,7 +188,7 @@
         }
       },
       "post": {
-        "description": "Create a new ticket",
+        "description": "Create a new ticket. Ticket is timestaped with current date and time. created_by is set to the user that created the ticket.",
         "parameters": [
           {
             "name": "body",
@@ -242,6 +207,12 @@
                 },
                 "priority": {
                   "example": "High"
+                },
+                "created_at": {
+                  "Do not edit": "<current-date-time>"
+                },
+                "created_by": {
+                  "Do not edit": "<current-date-time>"
                 },
                 "assigned_to": {
                   "example": "Tech 1"
@@ -291,7 +262,7 @@
         }
       },
       "put": {
-        "description": "Update a ticket",
+        "description": "Update a ticket. A last updated timestamp is added to the ticket when resubmitted.",
         "parameters": [
           {
             "name": "id",
@@ -308,11 +279,26 @@
                 "description": {
                   "example": "Ticket description"
                 },
+                "subject": {
+                  "example": "Ticket subject"
+                },
+                "status": {
+                  "example": "Not started"
+                },
                 "priority": {
                   "example": "High"
                 },
+                "created_at": {
+                  "Do not edit": "<current-date-time>"
+                },
+                "created_by": {
+                  "Do not edit": "<user-id>"
+                },
                 "assigned_to": {
-                  "example": "Tech 2"
+                  "example": "Tech 1"
+                },
+                "updated_at": {
+                  "Do not edit": "<current-date-time>"
                 }
               }
             }
@@ -363,27 +349,6 @@
             "description": "Internal Server Error"
           }
         }
-      }
-    },
-    "/auth/google": {
-      "get": {
-        "description": "Initiate Google authentication",
-        "parameters": [],
-        "responses": {}
-      }
-    },
-    "/auth/google/callback": {
-      "get": {
-        "description": "Callback endpoint for Google authentication",
-        "parameters": [],
-        "responses": {}
-      }
-    },
-    "/auth/logout": {
-      "get": {
-        "description": "Logout from the application",
-        "parameters": [],
-        "responses": {}
       }
     }
   }
