@@ -29,8 +29,7 @@ app
     );
     next();
   })
-  .use(cors({ methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'] }))
-  .use(cors({ orgin: '*' }))
+  .use(cors({ methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], origin: '*' }))
   .use('/', require('./routes'));
 
 mongodb.initDb((err) => {

@@ -5,9 +5,7 @@ dotenv.config();
 const initDb = (callback) => {
   mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true,
+    useUnifiedTopology: true
   })
     .then(() => {
       console.log('Database connected!');
