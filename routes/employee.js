@@ -18,7 +18,6 @@ router.post('/', validation.validEmployeeData, employeeController.createEmployee
 // UPDATE EMPLOYEE
 router.put(
   '/:id',
-  isAuthenticated,
   validation.validEmployeeData,
   employeeController.updateEmployee
 );
