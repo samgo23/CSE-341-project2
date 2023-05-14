@@ -42,14 +42,14 @@ const validTicketData = (req, res, next) => {
       });
     } else {
       // Check if the user is logged in
-      if (!req.session.user || !req.session.user.created_by) {
-        res.status(401).send({
-          success: false,
-          message: 'Please log in to create a ticket'
-        });
-      } else {
+//      if (!req.session.user || !req.session.user.created_by) {
+//        res.status(401).send({
+//          success: false,
+//          message: 'Please log in to create a ticket'
+//        });
+//      } else {
         next();
-      }
+//      }
     }
   });
 };
