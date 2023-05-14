@@ -1,7 +1,7 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
 const User = require('../models/user');
-const githubStrategy = require('passport-github2');
+const GithubStrategy = require('passport-github2');
 
 passport.use(
   new GoogleStrategy(
@@ -32,22 +32,41 @@ passport.use(
         }
       } catch (err) {
         console.error(err);
+        done(err, null);
       }
     }
   )
 );
 
 passport.use(
-  new githubStrategy(
+  new GithubStrategy(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
       callbackURL: process.env.CALLBACK_URL
     },
-    function (accessToken, refreshToken, profile, done) {
-      //User.findOrCreate({ githubId: profile.id }, function (err, user) {
-      return done(null, profile);
-      //});
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        let user = await User.findOne({ githubId: profile.id });
+
+        if (user) {
+          done(null, user);
+        } else {
+          const newUser = {
+            githubId: profile.id,
+            username: profile.username,
+            displayName: profile.displayName,
+            email: profile.emails[0].value,
+            avatar: profile.photos[0].value
+          };
+
+          user = await User.create(newUser);
+          done(null, user);
+        }
+      } catch (err) {
+        console.error(err);
+        done(err, null);
+      }
     }
   )
 );
@@ -56,8 +75,10 @@ passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
-passport.deserializeUser((user, done) => {
-  done(null, user);
+passport.deserializeUser((id, done) => {
+  User.findById(id, (err, user) => {
+    done(err, user);
+  });
 });
 
 module.exports = passport;

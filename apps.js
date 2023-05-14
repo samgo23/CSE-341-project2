@@ -43,8 +43,13 @@ mongodb.initDb((err) => {
 });
 
 app.get('/', (req, res) => {
-  res.send(req.session.user !== undefined ? `Logged in as ${session.user}` : 'Logged Out');
+  if (req.session.user) {
+    console.log('Logged in as', req.session.user);
+  }
+
+  res.send(req.session.user ? `Logged in` : 'Logged Out');
 });
+
 
 app.get(
   '/github/callback',
@@ -58,14 +63,14 @@ app.get(
   }
 );
 
-//app.post('/login', (req, res) => {
-//  const authorizationCode = req.body.code;
-//
-//  client.requestToken(authorizationCode, (err, result) => {
-//    if (err) {
-//      return res.status(500).send(err);
-//    }
-//
-//    res.redirect('/');
-//  });
-//});
+app.post('/login', (req, res) => {
+  const authorizationCode = req.body.code;
+
+  client.requestToken(authorizationCode, (err, result) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+
+    res.redirect('/');
+  });
+});

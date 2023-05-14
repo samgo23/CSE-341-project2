@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
+const googleSchema = new Schema({
   username: String,
   googleId: {
     type: String,
@@ -22,6 +22,50 @@ const userSchema = new Schema({
   image: {
     type: String
   },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+const githubSchema = new mongoose.Schema({
+  githubId: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  username: {
+    type: String,
+    required: true
+  },
+  displayName: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  avatar: {
+    type: String,
+    required: true
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+const userSchema = new Schema({
+  username: String,
+  password: String,
+  google: googleSchema,
+  github: githubSchema,
+  displayName: String,
+  firstName: String,
+  lastName: String,
+  image: String,
   createdAt: {
     type: Date,
     default: Date.now
