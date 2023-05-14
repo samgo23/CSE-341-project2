@@ -6,7 +6,7 @@ const employeeRouter = require('./employee');
 const ticketRouter = require('./ticket');
 const authRouter = require('./auth');
 
-router.use('/', swaggerRouter);
+router.use('/swagger', swaggerRouter);
 router.use('/employee', employeeRouter);
 router.use('/ticket', ticketRouter);
 router.use('/auth', authRouter);
