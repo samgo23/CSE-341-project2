@@ -47,7 +47,7 @@ app.get('/', (req, res) => {
     console.log('Logged in as', req.session.user);
   }
 
-  res.send(req.session.user ? `Logged in` : 'Logged Out');
+  res.send(req.session.user ? `Logged in ${req.session.user}` : 'Logged Out');
 });
 
 
