@@ -3,7 +3,7 @@ const ObjectId = require('mongodb').ObjectId;
 
 const getAllTickets = async (req, res) => {
   try {
-    const result = await mongodb.getDb().db().collection('ticket').find().toArray();
+    const result = await mongodb.getDb().collection('ticket').find().toArray();
 
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(result);
@@ -19,7 +19,7 @@ const getTicketById = async (req, res) => {
   }
 
   const ticketId = new ObjectId(req.params.id);
-  const result = await mongodb.getDb().db().collection('ticket').find({ _id: ticketId }).toArray();
+  const result = await mongodb.getDb().collection('ticket').find({ _id: ticketId }).toArray();
 
   if (result.length === 0) {
     res.status(404).json({ error: 'Ticket not found.' });
@@ -43,7 +43,7 @@ const createTicket = async (req, res) => {
     assigned_to: req.body.assigned_to
   };
 
-  const response = await mongodb.getDb().db().collection('ticket').insertOne(ticket);
+  const response = await mongodb.getDb().collection('ticket').insertOne(ticket);
 
   if (response.acknowledged) {
     res.status(201).json({ id: response.insertedId });
@@ -70,7 +70,7 @@ const updateTicket = async (req, res) => {
 
   const response = await mongodb
     .getDb()
-    .db()
+    
     .collection('ticket')
     .updateOne({ _id: ticketId }, ticketUpdate);
 
@@ -94,11 +94,11 @@ const deleteTicket = async (req, res) => {
   }
 
   const ticketId = new ObjectId(req.params.id);
-  const deletedTicket = await mongodb.getDb().db().collection('ticket').findOne({ _id: ticketId });
+  const deletedTicket = await mongodb.getDb().collection('ticket').findOne({ _id: ticketId });
 
   if (deletedTicket) {
     const { _id, created_at, created_by } = deletedTicket;
-    const response = await mongodb.getDb().db().collection('ticket').deleteOne({ _id: ticketId });
+    const response = await mongodb.getDb().collection('ticket').deleteOne({ _id: ticketId });
 
     if (response.deletedCount > 0) {
       res.status(200).json({ _id, created_at, created_by });

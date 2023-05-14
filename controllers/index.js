@@ -3,7 +3,7 @@ const ObjectId = require('mongodb').ObjectId;
 
 const getAllEmployees = async (req, res) => {
   try {
-    const result = await mongodb.getDb().db().collection('employee').find().toArray();
+    const result = await mongodb.getDb().collection('employee').find().toArray();
 
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(result);
@@ -21,7 +21,6 @@ const getEmployeeById = async (req, res) => {
   const employeeId = new ObjectId(req.params.id);
   const result = await mongodb
     .getDb()
-    .db()
     .collection('employee')
     .find({ _id: employeeId })
     .toArray();
@@ -44,7 +43,7 @@ const createEmployee = async (req, res) => {
     title: req.body.title
   };
 
-  const response = await mongodb.getDb().db().collection('employee').insertOne(employee);
+  const response = await mongodb.getDb().collection('employee').insertOne(employee);
 
   if (response.acknowledged) {
     res.status(201).json({ id: response.insertedId });
@@ -70,7 +69,6 @@ const updateEmployee = async (req, res) => {
 
   const response = await mongodb
     .getDb()
-    .db()
     .collection('employee')
     .replaceOne({ _id: userId }, employee);
 
@@ -96,13 +94,12 @@ const removeEmployee = async (req, res) => {
   const userId = new ObjectId(req.params.id);
   const deletedEmployee = await mongodb
     .getDb()
-    .db()
     .collection('employee')
     .findOne({ _id: userId });
 
   if (deletedEmployee) {
     const { _id, firstName, lastName } = deletedEmployee;
-    const response = await mongodb.getDb().db().collection('employee').deleteOne({ _id: userId });
+    const response = await mongodb.getDb().collection('employee').deleteOne({ _id: userId });
 
     if (response.deletedCount > 0) {
       res.status(200).json({ message: 'Employee deleted', employee: { _id, firstName, lastName } });

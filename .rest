@@ -1,5 +1,9 @@
 ###
-GET http://localhost:8080/employee HTTP/1.1
+GET /employee HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer <token>
+
 
 ###
 GET http://localhost:8080/employee/645314ed574650f6e277dbae HTTP/1.1
