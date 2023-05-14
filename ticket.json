@@ -1,12 +1,12 @@
 {
-    "_id": {
-      "$oid": "645eb25fe4db89681f452a12"
-    }, 
-    "subject": "Ticket Subject",
-    "description": "This feauture is not working",
-    "status": "Not started",
-    "priority": "High",
-    "created_at": " Timestamp",
-    "created_by": " User Name",
-    "assigned_to": "Tech 1"
+  "_id": {
+    "$oid": "645eb25fe4db89681f452a12"
+  },
+  "subject": "Ticket Subject",
+  "description": "This feauture is not working",
+  "status": "Not started",
+  "priority": "High",
+  "created_at": " Timestamp",
+  "created_by": " User Name",
+  "assigned_to": "Tech 1"
 }

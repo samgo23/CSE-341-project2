@@ -22,7 +22,6 @@ const validEmployeeData = (req, res, next) => {
   });
 };
 
-
 const validTicketData = (req, res, next) => {
   const validationRule = {
     subject: 'required|string',
@@ -54,10 +53,5 @@ const validTicketData = (req, res, next) => {
     }
   });
 };
-
-
-
-
-
 
 module.exports = { validEmployeeData, validTicketData };

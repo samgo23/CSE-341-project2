@@ -7,9 +7,7 @@
   },
   "host": "cse-341-project2-9tcn.onrender.com",
   "basePath": "/",
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https"],
   "paths": {
     "/login": {
       "get": {
@@ -45,13 +43,11 @@
         "parameters": [],
         "responses": {}
       }
-    },    
+    },
     "/employee/": {
       "get": {
         "description": "Get all employees",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [],
         "responses": {
           "200": {
@@ -87,13 +83,7 @@
                   "example": "Software Engineer"
                 }
               },
-              "required": [
-                "firstName",
-                "lastName",
-                "email",
-                "startDate",
-                "title"
-              ]
+              "required": ["firstName", "lastName", "email", "startDate", "title"]
             }
           }
         ],
@@ -116,9 +106,7 @@
     "/employee/{id}": {
       "get": {
         "description": "Get employee by ID",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -223,9 +211,7 @@
     "/ticket/": {
       "get": {
         "description": "Get all tickets",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [],
         "responses": {
           "200": {
@@ -283,9 +269,7 @@
     "/ticket/{id}": {
       "get": {
         "description": "Get a ticket by ID",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
