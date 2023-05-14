@@ -42,7 +42,7 @@ mongodb.initDb((err) => {
   }
 });
 
-app.get('/', (req, res) => { res.send(req.session.user !== undefined ? `Logged in as Sam Gordon` : "Logged Out")});
+app.get('/', (req, res) => { res.send(req.session.user !== undefined ? `Logged in as ${session.user}` : "Logged Out")});
 
 app.get('/github/callback', passport.authenticate('github', {
     failureRedirect: '/api-docs', session: false}), 

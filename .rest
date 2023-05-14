@@ -41,22 +41,39 @@ GET http://localhost:8080/ticket HTTP/1.1
 
 
 ###
-GET http://localhost:8080/ticket/645eb25fe4db89681f452a12 HTTP/1.1
+GET http://localhost:8080/ticket/645ecd3ab01342ec61909571 HTTP/1.1
 
 ###
 POST http://localhost:8080/ticket HTTP/1.1
 content-type: application/json
 
 {
-    "subject": "Ticket Subject",
+    "subject": "Test ticket",
     "description": "This feauture is not working",
     "status": "Not started",
     "priority": "High",
-    "created_at": " Timestamp",
-    "created_by": " User Name",
+    "created_at": "<current-date-time>",
+    "created_by": "<user-id>",
     "assigned_to": "Tech 1"
 }
 
+###
+PUT http://localhost:8080/ticket/645ecd3ab01342ec61909571 HTTP/1.1
+content-type: application/json
+
+{
+    "description": "Validation is not working correctly",
+    "priority": "High",
+    "assigned_to": "Tech 2"
+}
+
+###
+PUT http://localhost:8080/ticket/645ecd3ab01342ec61909571 HTTP/1.1
+content-type: application/json
+    
+    {
+        "status": "In progress"
+    }
 
 ###
 GET https://cse-341-project2-9tcn.onrender.com/employee HTTP/1.1

@@ -1,20 +1,23 @@
 const mongodb = require('../db/connection');
 const ObjectId = require('mongodb').ObjectId;
 
-const getAllEmployees = async (req, res) => {
-  const result = await mongodb
-    .getDb()
-    .db()
-    .collection('employee')
-    .find();
-    result.toArray().then((err, list) => {
-      if (err) {
-        res.status(400).json({ message: err });
-      }
+
+const getAllEmployees= async (req, res) => {
+  try {
+      const result = await mongodb
+          .getDb()
+          .db()
+          .collection('employee')
+          .find()
+          .toArray();
+
       res.setHeader('Content-Type', 'application/json');
-      res.status(200).json(list);
-    });
+      res.status(200).json(result);
+  } catch (error) {
+      res.status(400).json({ message: error.message });
+  }
 };
+
 
 const getEmployeeById = async (req, res) => {
   if (!ObjectId.isValid(req.params.id)) {

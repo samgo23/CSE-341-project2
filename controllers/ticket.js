@@ -1,21 +1,22 @@
-const e = require('express');
 const mongodb = require('../db/connection');
 const ObjectId = require('mongodb').ObjectId;
 
 const getAllTickets = async (req, res) => {
-    const result = await mongodb
-        .getDb()
-        .db()
-        .collection('ticket')
-        .find();
-        result.toArray().then((err, list) => {
-            if (err) {
-                res.status(400).json({ message: err });
-            }
-            res.setHeader('Content-Type', 'application/json');
-            res.status(200).json(list);
-        });
+    try {
+        const result = await mongodb
+            .getDb()
+            .db()
+            .collection('ticket')
+            .find()
+            .toArray();
+
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
     }
+};
+
 
 const getTicketById = async (req, res) => {
     if (!ObjectId.isValid(req.params.id)) {
@@ -41,13 +42,15 @@ const getTicketById = async (req, res) => {
 }
 
 const createTicket = async (req, res) => {
+    const currentDate = new Date(); 
+
     const ticket ={
         subject: req.body.subject,
         description: req.body.description,
         status: req.body.status,
         priority: req.body.priority,
-        created_at: req.body.created_at,
-        created_by: req.body.created_by,
+        created_at: currentDate.toISOString(),
+        //created_by: req.session.user.created_by,
         assigned_to: req.body.assigned_to
     };
 
@@ -67,17 +70,17 @@ const updateTicket = async (req, res) => {
         return;
     }
     const ticketId = new ObjectId(req.params.id);
+
     const ticket = {
-        subject: req.body.subject,
         description: req.body.description,
-        status: req.body.status,
         priority: req.body.priority,
-        created_at: req.body.created_at,
-        created_by: req.body.created_by,
         assigned_to: req.body.assigned_to
     };
 
-    const response = await mongodb.getDb().db().collection('ticket').updateOne({ _id: ticketId }, { $set: ticket });
+    const currentDate = new Date();
+    const ticketUpdate = { $set: { last_updated: currentDate.toISOString() } };
+
+    const response = await mongodb.getDb().db().collection('ticket').updateOne({ _id: ticketId }, ticketUpdate);
 
     if (response.modifiedCount > 0) {
         const updatedFields = {};
